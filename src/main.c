@@ -1,32 +1,12 @@
-/********************************** (C) COPYRIGHT *******************************
-* File Name          : main.c
-* Author             : WCH
-* Version            : V1.0.0
-* Date               : 2022/01/18
-* Description        : Main program body.
-*********************************************************************************
-* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
-* Attention: This software (modified or not) and binary are used for 
-* microcontroller manufactured by Nanjing Qinheng Microelectronics.
-*******************************************************************************/
-/*
- *@Note
-MQTT example, this program is used to demonstrate TCP/IP-based MQTT protocol communication,
-After the single-chip microcomputer connects to Ethernet and MQTT server, a topic will be released.
-Subscribe to this topic and publish messages to this topic.
-
-For details on the selection of engineering chips,
-please refer to the "CH32V20x Evaluation Board Manual" under the CH32V20xEVT\EVT\PUB folder.
-*/
 #include "string.h"
 #include "eth_driver.h"
 #include "MQTTPacket.h"
 
 u8 MACAddr[6];                                     //MAC address
-u8 IPAddr[4]   = {192,168,178,220};                   //IP address
-u8 GWIPAddr[4] = {192,168,178,1};                    //Gateway IP address
-u8 IPMask[4]   = {255,255,255,0};                  //subnet mask
-u8 DESIP[4]    = {192,168,178,64};                              //MQTT server IP address,!!need to be modified manually
+u8 IPAddr[4]   = {172,18,0,123};   //IP address
+u8 GWIPAddr[4] = {172,18,0,1};     //Gateway IP address
+u8 IPMask[4]   = {255,255,240,0};     //subnet mask
+u8 DESIP[4]    = {202,61,227,61};    //MQTT server IP address,!!need to be modified manually
 
 
 u8 SocketId;                                       //socket id
@@ -405,8 +385,19 @@ void WCHNET_HandleGlobalInt(void)
  *
  * @return  none
  */
+extern u8 publishValid;
 int main(void)
 {
+    // RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    // GPIO_InitTypeDef initLed = {0};
+    // initLed.GPIO_Mode = GPIO_Mode_Out_PP;
+    // initLed.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
+    // initLed.GPIO_Speed = GPIO_Speed_2MHz;
+    // GPIO_Init(GPIOB,&initLed);
+    
+
+  
+
     u8 i;
     Delay_Init();
     USART_Printf_Init(115200);                                               //USART initialize
