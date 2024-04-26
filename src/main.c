@@ -16,8 +16,8 @@ u16 desport = 1883; // MQTT server port
 u16 srcport = 4200;
 u16 DnsPort = 53; // source port
 
-char *username = "vale";                                                             // Device name, unique for each device, available "/" for classification
-char *password = "12c32aa281f4368da1ce692b6b2f71ab0942a8a3a07cfdd3ae8d12172b2c5a8d"; // Server login password
+char *username = "user";                                                             // Device name, unique for each device, available "/" for classification
+char *password = "pw"; // Server login password
 char *sub_topic = "topic/1";                                                         // subscribed session name
 char *pub_topic = "topic/1";                                                         // Published session name
 int pub_qos = 0;                                                                     // Publish quality of service
@@ -534,12 +534,12 @@ extern u8 publishValid;
 
 int main(void)
 {
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    GPIO_InitTypeDef initLed = {0};
-    initLed.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    initLed.GPIO_Pin = GPIO_Pin_3;
-    initLed.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_Init(GPIOB, &initLed);
+    // RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    // GPIO_InitTypeDef initLed = {0};
+    // initLed.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    // initLed.GPIO_Pin = GPIO_Pin_3;
+    // initLed.GPIO_Speed = GPIO_Speed_2MHz;
+    // GPIO_Init(GPIOB, &initLed);
 
     u8 i;
     Delay_Init();
@@ -561,6 +561,14 @@ int main(void)
     printf("\n");
 
     TIM2_Init();
+    
+    
+//  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+//     GPIO_InitTypeDef initLed = {0};
+//     initLed.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+//     initLed.GPIO_Pin = GPIO_Pin_3;
+//     initLed.GPIO_Speed = GPIO_Speed_2MHz;
+//     GPIO_Init(GPIOB, &initLed);
     WCHNET_DHCPSetHostname("WCHNET");
     i = ETH_LibInit(IPAddr, GWIPAddr, IPMask, MACAddr); // Ethernet library initialize
     mStopIfError(i);
@@ -580,7 +588,7 @@ int main(void)
         {
             WCHNET_HandleGlobalInt();
         }
-        if (publishValid == 1)
+        if (    GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_3) == 1)
         {
             // printf("Button Pressed\r\n");
             publishValid = 0;

@@ -16,7 +16,7 @@ void NMI_Handler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
 void HardFault_Handler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
 void ETH_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
 void TIM2_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
-u8 publishValid = 0;
+u8 publishValid = 1;
 u16 timeCnt = 0;
 /*********************************************************************
  * @fn      NMI_Handler
